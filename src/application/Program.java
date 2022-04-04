@@ -43,6 +43,10 @@ public class Program {
 		seller.setName("Andres Iniesta");
 		sellerDao.update(seller);
 		System.out.println("Update completed!");
+		
+		System.out.println("\n=== TEST 6 - Seller Delete ===");
+		sellerDao.deleteById(11);
+		System.out.println("Delete completed!");
 
 	}
 

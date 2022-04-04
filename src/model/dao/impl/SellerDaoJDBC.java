@@ -68,8 +68,7 @@ public class SellerDaoJDBC implements SellerDAO {
 
 		try {
 			ps = conn.prepareStatement("UPDATE seller "
-					+ "SET name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? "
-					+ "WHERE Id = ?");
+					+ "SET name = ?, Email = ?, BirthDate = ?, BaseSalary = ?, DepartmentId = ? " + "WHERE Id = ?");
 
 			ps.setString(1, obj.getName());
 			ps.setString(2, obj.getEmail());
@@ -89,7 +88,19 @@ public class SellerDaoJDBC implements SellerDAO {
 
 	@Override
 	public void deleteById(Integer id) {
-		// TODO Auto-generated method stub
+		PreparedStatement ps = null;
+
+		try {
+			ps = conn.prepareStatement("DELETE FROM seller " + "WHERE Id = ?");
+
+			ps.setInt(1, id);
+			ps.executeUpdate();
+			
+		} catch (SQLException e) {
+			throw new DbException(e.getMessage());
+		} finally {
+			DB.closeStatement(ps);
+		}
 
 	}
 
