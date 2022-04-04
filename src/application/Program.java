@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import model.dao.DaoFactory;
+import model.dao.DepartmentDAO;
 import model.dao.SellerDAO;
 import model.entities.Department;
 import model.entities.Seller;
@@ -13,6 +14,7 @@ public class Program {
 	public static void main(String[] args) {
 
 		SellerDAO sellerDao = DaoFactory.createSellerDao();
+		DepartmentDAO depDao = DaoFactory.createDepartmentDao();
 
 		System.out.println("=== TEST 1 - Seller FindById ===");
 		Seller seller = sellerDao.findById(3);
@@ -47,6 +49,32 @@ public class Program {
 		System.out.println("\n=== TEST 6 - Seller Delete ===");
 		sellerDao.deleteById(11);
 		System.out.println("Delete completed!");
+		
+		System.out.println("=== TEST 1 - Department FindById ===");
+		Department dep = depDao.findById(3);
+		System.out.println(dep);
+		
+		System.out.println("\n=== TEST 3 - Department FindAll ===");
+		List<Department> lista3 = depDao.findAll();
+		for (Department dept: lista3) {
+			System.out.println(dept);
+		}
+		
+		System.out.println("\n=== TEST 4 - Department Insert ===");
+		Department newDep = new Department(null, "Cars");
+		depDao.insert(newDep);
+		System.out.println("newSeller id = " + newDep.getId());
+		
+		System.out.println("\n=== TEST 5 - Department Update ===");
+		dep = depDao.findById(6);
+		dep.setName("Sports Cars");
+		depDao.update(dep);
+		System.out.println("Update completed!");
+		
+		System.out.println("\n=== TEST 6 - Department Delete ===");
+		depDao.deleteById(6);
+		System.out.println("Delete completed!");
+		
 
 	}
 
